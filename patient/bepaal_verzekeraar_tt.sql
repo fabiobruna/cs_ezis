@@ -1,3 +1,11 @@
+/* ==================================================================== <HEADER>
+Source      : bepaal_verzekeraar_tt.sql	
+Description :
+======================================================================== <NOTES>
+
+
+==================================================================== <SOURCE> */
+
 declare @verzekeraar varchar(10)
 
 drop table #tmp
@@ -5,7 +13,7 @@ select * into #tmp
 from (
 select t10.patientnummer,
  ( select top 1 autoid 
-   from EZIS_PATIENT_PATHIST 
+   from PATIENT_PATHIST 
     where INGANGSDAT <= t10.verrichtingsdatum
     and PATIENTNR = t10.patientnummer
 order by autoid desc
@@ -17,8 +25,8 @@ from ver_uitgev_verrichtingen t10
 update    #tmp
 set       verzekeraar = 
           (
-          select patverz 
-          from   EZIS_PATIENT_PATHIST s1
+          select PARTVERZ 
+          from   PATIENT_PATHIST s1
           where  s1.AutoID = #tmp.autoid
           )
 where     autoid is not null
