@@ -3,6 +3,7 @@ Source      : lijst_van_vragen.sql
 Description :
 ======================================================================== <NOTES>
 
+Werkt niet altijd, alleen met lijsten zonder subvragen? Uitzoeken.
 
 ==================================================================== <SOURCE> */
 
@@ -11,7 +12,7 @@ AS
 (
  SELECT t00.childid, t00.lijstid, t00.treelayid, t00.volgnr, 0 AS rlevel
   FROM vrlijst_treelay t00
- WHERE t00.lijstid = '0000007580'              -- AAN TE PASSEN ID
+ WHERE t00.lijstid = '0000000000'              -- AAN TE PASSEN ID
 UNION ALL
  SELECT a.childid, a.lijstid, l.treelayid, l.volgnr, l.rlevel + 1
  FROM lijst_van_vragen l
